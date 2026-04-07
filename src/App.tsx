@@ -7,7 +7,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { CartProvider } from "@/hooks/useCart";
 import Index from "./pages/Index.tsx";
 import Promocoes from "./pages/Bebidas.tsx";
-import KitBuilder from "./pages/KitBuilder.tsx";
+
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminLayout from "./components/admin/AdminLayout.tsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.tsx";
@@ -38,7 +38,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/promocoes" element={<Promocoes />} />
               <Route path="/bebidas" element={<Promocoes />} />
-              <Route path="/kit" element={<KitBuilder />} />
+              
               <Route path="/produto/:id" element={<ProductDetails />} />
               <Route path="/carrinho" element={<CartPage />} />
               <Route path="/admin/login" element={<AdminLogin />} />
