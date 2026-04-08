@@ -14,10 +14,9 @@ const CartPage = () => {
   const navigate = useNavigate();
   const { items, subtotal, updateQuantity, removeItem, clearCart } = useCart();
   const [customerName, setCustomerName] = useState("");
-  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [cpf, setCpf] = useState("");
   const [address, setAddress] = useState("");
+  const [notes, setNotes] = useState("");
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -26,8 +25,8 @@ const CartPage = () => {
       toast.error("Adicione pelo menos 1 item.");
       return;
     }
-    if (!customerName.trim() || !email.trim() || !phone.trim() || !cpf.trim()) {
-      toast.error("Preencha nome, e-mail, telefone e CPF.");
+    if (!customerName.trim() || !phone.trim() || !address.trim()) {
+      toast.error("Preencha nome, telefone e endereço.");
       return;
     }
 
@@ -36,9 +35,8 @@ const CartPage = () => {
       const { data, error } = await supabase.functions.invoke("create-payment", {
         body: {
           customerName: customerName.trim(),
-          customerEmail: email.trim(),
           customerPhone: phone.trim(),
-          customerDocument: cpf.trim(),
+          address: address.trim(),
           address: address.trim(),
           items: items.map((i) => ({
             name: i.productName,
