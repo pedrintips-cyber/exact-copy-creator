@@ -23,9 +23,9 @@ serve(async (req) => {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     const body = await req.json();
-    const { customerName, customerEmail, customerPhone, customerDocument, address, items, subtotal, paymentMethod, notes } = body;
+    const { customerName, customerPhone, address, items, subtotal, notes } = body;
 
-    if (!customerName || !customerEmail || !customerPhone || !customerDocument || !items?.length || !subtotal) {
+    if (!customerName || !customerPhone || !items?.length || !subtotal) {
       return new Response(JSON.stringify({ error: "Campos obrigatórios faltando" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -40,7 +40,7 @@ serve(async (req) => {
       customer_name: customerName,
       customer_phone: customerPhone,
       customer_address: address || null,
-      customer_cpf: customerDocument,
+      customer_cpf: null,
       items: items,
       subtotal: subtotal,
       total: subtotal,
@@ -63,12 +63,12 @@ serve(async (req) => {
       description: `Pedido #${order.id.slice(0, 8)}`,
       reference: reference,
       source: "api_externa",
-      customer: {
-        name: customerName,
-        email: customerEmail,
-        phone: customerPhone.replace(/\D/g, ""),
-        document: customerDocument.replace(/\D/g, ""),
-      },
+        customer: {
+          name: customerName,
+          email: `${customerPhone.replace(/\D/g, "")}@pedido.local`,
+          phone: customerPhone.replace(/\D/g, ""),
+          document: "00000000000",
+        },
     };
 
     console.log("Paradise request payload:", JSON.stringify(paradisePayload));
