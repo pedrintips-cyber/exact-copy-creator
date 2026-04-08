@@ -20,6 +20,7 @@ import AdminKitItems from "./pages/admin/AdminKitItems.tsx";
 import AdminSettings from "./pages/admin/AdminSettings.tsx";
 import ProductDetails from "./pages/ProductDetails.tsx";
 import CartPage from "./pages/Cart.tsx";
+import PaymentStatus from "./pages/PaymentStatus.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
