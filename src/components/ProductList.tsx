@@ -90,7 +90,7 @@ const ProductList = () => {
           <h2 className="text-lg font-bold text-primary px-4 mb-3">
             {cat.icon} {cat.name}
           </h2>
-          <div className="flex gap-3 overflow-x-auto px-4 pb-2 snap-x snap-mandatory scrollbar-hide">
+          <div className="grid grid-cols-2 gap-3 px-4">
             {cat.products.map((product) => (
               <ProductScrollCard key={product.id} product={product} />
             ))}
@@ -101,7 +101,7 @@ const ProductList = () => {
       {uncategorized.length > 0 && (
         <section className="mb-6">
           <h2 className="text-lg font-bold text-primary px-4 mb-3">📦 Outros</h2>
-          <div className="flex gap-3 overflow-x-auto px-4 pb-2 snap-x snap-mandatory scrollbar-hide">
+          <div className="grid grid-cols-2 gap-3 px-4">
             {uncategorized.map((product) => (
               <ProductScrollCard key={product.id} product={product} />
             ))}
@@ -119,7 +119,7 @@ const ProductScrollCard = ({ product }: { product: Product }) => {
   return (
     <Link
       to={`/produto/${product.id}`}
-      className={`flex-shrink-0 w-[160px] snap-start rounded-2xl overflow-hidden product-card ${
+      className={`rounded-2xl overflow-hidden product-card ${
         product.is_best_seller ? "border-2 border-success animate-pulse-green" : ""
       }`}
     >
