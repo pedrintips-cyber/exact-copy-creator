@@ -3,7 +3,6 @@ import { useSearchParams, Link } from "react-router-dom";
 import { CheckCircle2, Clock, Copy, XCircle, ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/useCart";
-import { useCart } from "@/hooks/useCart";
 import { toast } from "sonner";
 
 const formatPrice = (cents: number) => `R$ ${(cents / 100).toFixed(2).replace(".", ",")}`;
