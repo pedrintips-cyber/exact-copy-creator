@@ -5,7 +5,13 @@ import { supabase } from "@/integrations/supabase/client";
 const StoreHeader = () => {
   const [banners, setBanners] = useState<{ id: string; image_url: string; title: string | null }[]>([]);
   const [currentBanner, setCurrentBanner] = useState(0);
-  const [settings, setSettings] = useState<Record<string, string>>({});
+  const [settings, setSettings] = useState<Record<string, string>>(() => {
+    try {
+      const cached = sessionStorage.getItem("store_settings");
+      return cached ? JSON.parse(cached) : {};
+    } catch { return {}; }
+  });
+  const logoLoading = Object.keys(settings).length === 0;
 
   useEffect(() => {
     const load = async () => {
@@ -25,6 +31,7 @@ const StoreHeader = () => {
         map[item.key] = item.value || "";
       });
       setSettings(map);
+      try { sessionStorage.setItem("store_settings", JSON.stringify(map)); } catch {}
     };
     load();
   }, []);
@@ -70,7 +77,9 @@ const StoreHeader = () => {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-background rounded-t-[40px]" />
         <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 w-[110px] h-[110px] rounded-full border-4 border-background shadow-lg overflow-hidden bg-background flex items-center justify-center">
           {settings.store_logo ? (
-            <img src={settings.store_logo} alt="Logo" className="w-full h-full object-cover" />
+            <img src={settings.store_logo} alt="Logo" className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
+          ) : logoLoading ? (
+            <div className="w-full h-full bg-muted animate-pulse rounded-full" />
           ) : (
             <span className="text-4xl">🍕</span>
           )}
