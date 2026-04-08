@@ -20,6 +20,7 @@ import AdminKitItems from "./pages/admin/AdminKitItems.tsx";
 import AdminSettings from "./pages/admin/AdminSettings.tsx";
 import ProductDetails from "./pages/ProductDetails.tsx";
 import CartPage from "./pages/Cart.tsx";
+import PaymentStatus from "./pages/PaymentStatus.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
               
               <Route path="/produto/:id" element={<ProductDetails />} />
               <Route path="/carrinho" element={<CartPage />} />
+              <Route path="/pagamento" element={<PaymentStatus />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />
